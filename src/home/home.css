@@ -1,0 +1,24 @@
+.challenges-header-block {
+  display: flex;
+  align-items: center;
+}
+
+.sorter {
+  margin-left: auto;
+}
+
+.challenge {
+  border: 1px solid #111;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 8px;
+}
+
+.challenge-title {
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.description {
+  margin-bottom: 16px;
+}

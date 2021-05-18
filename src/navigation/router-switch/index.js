@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
+import { Home } from "../../home";
 
 export const RouteSwitchComponent = () => {
   return <Switch>
@@ -7,7 +8,7 @@ export const RouteSwitchComponent = () => {
       <h1>employee page</h1>
     </Route>
     <Route path="/">
-      <h1>homepage</h1>
+      <Home />
     </Route>
   </Switch>
 }
