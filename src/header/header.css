@@ -1,0 +1,12 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  background: #eee;
+  margin: 0 -9999px;
+  padding: 0 9999px;
+  box-shadow: 8px 0px 8px 0px #111;
+}
+
+.login-container {
+  margin-left: auto;
+}

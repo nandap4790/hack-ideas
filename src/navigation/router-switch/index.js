@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import { Home } from "../../home";
+import { Employee } from "../../employee";
 
 export const RouteSwitchComponent = () => {
   return <Switch>
     <Route path="/employee">
-      <h1>employee page</h1>
+      <Employee />
     </Route>
     <Route path="/">
       <Home />
