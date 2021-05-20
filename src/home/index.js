@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { challengesList } from "../data/constants";
+import firebaseContext from "../firebase-context";
 
 import "./home.css";
 
 export const sortByUpvote = (challenges, sortState) => {
-  const sortByDescending = [...challenges].sort((first, second) => second.upvotes - first.upvotes);
+  const sortByDescending = [...challenges].sort(
+    (first, second) => second.upvotes - first.upvotes
+  );
   return sortState === "descending" ? sortByDescending : challenges;
-}
+};
 
 export const Home = () => {
   const [challenges, setChallenges] = useState(challengesList);
@@ -14,16 +17,16 @@ export const Home = () => {
 
   const challengesDom = () => {
     return challenges.map((challenge, index) => {
-      return <div className="challenge challenge-1" key={index}>
-        <h3 className="challenge-title">{challenge.title}</h3>
-        <div className="description">
-          {challenge.description}
+      return (
+        <div className="challenge challenge-1" key={index}>
+          <h3 className="challenge-title">{challenge.title}</h3>
+          <div className="description">{challenge.description}</div>
+          <div className="tags">Tags: {challenge.tags}</div>
+          <div className="upvotes">{challenge.upvotes}</div>
         </div>
-        <div className="tags">Tags: {challenge.tags}</div>
-        <div className="upvotes">{challenge.upvotes}</div>
-      </div>
-    })
-  }
+      );
+    });
+  };
 
   const sortWrapperFunction = () => {
     if (sortState === "default") {
@@ -33,17 +36,33 @@ export const Home = () => {
       setChallenges(sortByUpvote(challengesList, "default"));
       setSortState("default");
     }
-  }
+  };
 
-  const sortClickText = sortState === "default" ? "Sort by Most Upvotes" : "Sort by Default";
+  useEffect(() => {
+    console.log(
+      firebaseContext
+        .collection("employees")
+        .get()
+        .then((querySnapShot) =>
+          querySnapShot.forEach((doc) => {
+            console.log(doc.data());
+          })
+        )
+    );
+  }, []);
 
-  return <div className="home-container">
-    <div className="challenges-header-block">
-      <h2 className="challenges-header">Challenges</h2>
-      <div className="sorter" onClick={() => sortWrapperFunction()}>{sortClickText}</div>
+  const sortClickText =
+    sortState === "default" ? "Sort by Most Upvotes" : "Sort by Default";
+
+  return (
+    <div className="home-container">
+      <div className="challenges-header-block">
+        <h2 className="challenges-header">Challenges</h2>
+        <div className="sorter" onClick={() => sortWrapperFunction()}>
+          {sortClickText}
+        </div>
+      </div>
+      <div className="challenges-container">{challengesDom()}</div>
     </div>
-    <div className="challenges-container">
-      {challengesDom()}
-    </div>
-  </div >
-}
+  );
+};

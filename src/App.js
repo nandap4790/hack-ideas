@@ -2,10 +2,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { RouteSwitchComponent } from './navigation/router-switch';
 import { Header } from './header';
+import "firebase/firestore";
 
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="hack-ideas-container">
